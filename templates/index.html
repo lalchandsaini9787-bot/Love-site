@@ -2,59 +2,109 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<title>make. studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#ff8fa3;--card:#fff;--accent:#ff3b6b}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ff758c,#ff7eb3);min-height:100vh}
-.container{max-width:400px;margin:auto;padding:20px 20px 100px}
-#gate{position:fixed;inset:0;background:linear-gradient(135deg,#ff758c,#ff4e6a);display:flex;align-items:center;justify-content:center;z-index:10;padding:20px}
-.box{background:#fff;border-radius:28px;padding:28px;width:100%;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.box input{width:100%;padding:14px;border-radius:14px;border:2px solid #ffd1dc;margin:14px 0;outline:none;text-align:center}
-.box button{width:100%;padding:14px;border:none;border-radius:14px;background:#ff3b6b;color:#fff;font-weight:700;cursor:pointer}
-h1{font-family:'Dancing Script';font-size:2.6rem;color:#fff;text-align:center;margin:32px 0 16px}
-.card{background:#fff;border-radius:22px;padding:22px;margin:14px 0;box-shadow:0 12px 40px rgba(0,0,0,.12)}
-.q{text-align:center;padding:10px}
-.q h2{font-size:1.25rem;color:#2d1a25;line-height:1.4;margin-bottom:20px}
-.btns{position:relative;height:58px;display:flex;justify-content:center;gap:12px}
-.btns button{padding:12px 26px;border-radius:30px;border:none;font-weight:700;cursor:pointer}
-#yes{background:#ff3b6b;color:#fff}
-#no{background:#f1f1f1;color:#999;position:absolute;left:62%;transition:.25s}
-.upload{border:2px dashed #ff8fa3;border-radius:14px;padding:16px;text-align:center;background:#fff5f7;display:block}
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px}
+body{font-family:'Poppins',sans-serif;background:var(--bg);transition:.3s;padding-bottom:100px}
+.container{max-width:420px;margin:auto;padding:14px}
+.top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.7);backdrop-filter:blur(16px);padding:12px 14px;border-radius:16px;margin-bottom:10px}
+.logo{font-weight:800;letter-spacing:-.5px}
+.icon-btn{width:36px;height:36px;border-radius:12px;border:none;background:#111;color:#fff;font-size:16px}
+#gate,#qScreen{position:fixed;inset:0;background:linear-gradient(135deg,#ff758c,#ff4e6a);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px}
+.box{background:#fff;border-radius:24px;padding:24px;width:100%;max-width:340px;text-align:center}
+.input{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ffd1dc;outline:none;text-align:center;margin-top:10px}
+.btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;margin-top:10px}
+.card{background:var(--card);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.pill{display:inline-block;padding:7px 12px;border-radius:30px;font-size:11px;font-weight:600;margin:3px;background:#f5f5f5;cursor:pointer;border:1.5px solid transparent}
+.pill.active{background:var(--accent);color:#fff}
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.theme{border-radius:14px;height:72px;padding:10px;display:flex;align-items:end;color:#fff;font-weight:700;font-size:11px;cursor:pointer;border:2.5px solid transparent}
+.theme.active{border-color:#111}
+.q-btns{position:relative;height:68px;display:flex;justify-content:center;gap:10px;margin-top:12px}
+.q-btns button{padding:11px 24px;border-radius:30px;border:none;font-weight:700}
+#yes{background:var(--accent);color:#fff}
+#no{background:#eee;color:#888;position:absolute;left:60%;transition:.2s}
+.bottom-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:92%;max-width:400px;background:rgba(15,15,15,.94);backdrop-filter:blur(20px);border-radius:26px;display:flex;justify-content:space-around;padding:10px 4px;z-index:30}
+.bottom-nav button{background:transparent;border:none;color:#777;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600}
+.bottom-nav button.active{color:#fff}
+#settings{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);z-index:300;display:none;padding:20px;align-items:end}
+#settings.show{display:flex}
+.sheet{background:#fff;width:100%;max-width:420px;margin:auto;border-radius:24px 24px 0 0;padding:18px;max-height:80vh;overflow:auto}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
+.toggle{width:44px;height:26px;background:#ddd;border-radius:20px;position:relative;cursor:pointer}
+.toggle.on{background:var(--accent)}
+.toggle i{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.toggle.on i{left:21px}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+.gallery-grid div{position:relative}
+.gallery-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+.gallery-grid span{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:18px;height:18px;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.song{ display:flex;gap:8px;align-items:center;padding:8px;border-radius:10px;cursor:pointer;border:1.5px solid transparent}
+.song.active{border-color:var(--accent);background:#fff0f3}
 </style>
 </head>
-<body>
-<div id="gate"><div class="box"><h2 style="font-family:'Dancing Script';font-size:2rem;color:#ff3b6b">hey ❤️</h2><p style="font-size:.9rem;color:#666">what's your name?</p><input id="n" placeholder="Amayra"><button onclick="go()">continue →</button></div></div>
+<body id="body">
 
-<div class="container" id="main" style="display:none">
-<h1 id="hi">hey ❤️</h1>
+<div id="gate"><div class="box"><h2 style="color:#ff3b6b">hey ❤️</h2><p style="font-size:12px;color:#666">what's your name?</p><input id="n" class="input" placeholder="Amayra"><button class="btn" onclick="startQ()">Continue →</button></div></div>
 
-<div class="card q" id="qBox">
-<h2 id="qT"></h2>
-<div class="btns"><button id="yes" onclick="next()">yes</button><button id="no" onmouseover="move()" ontouchstart="move()" onclick="move()">no</button></div>
-<p id="msg" style="color:#ff3b6b;margin-top:14px;font-size:.85rem;display:none">no is not an option 😏</p>
+<div id="qScreen" style="display:none"><div class="box"><h2 id="qT" style="font-size:18px;line-height:1.4"></h2><div class="q-btns"><button id="yes" onclick="nextQ()">YES</button><button id="no" onmouseover="moveNo()" ontouchstart="moveNo()" onclick="moveNo()">NO</button></div><p id="qMsg" style="font-size:11px;color:#ff3b6b;margin-top:8px;display:none">no is not an option 😏</p></div></div>
+
+<div id="main" style="display:none">
+<div class="container">
+<div class="top"><div class="logo">make.</div><div style="display:flex;gap:8px"><div id="hi" style="font-size:11px;display:flex;align-items:center"></div><button class="icon-btn" onclick="openSet()">⚙️</button></div></div>
+
+<div id="tab-home">
+<div class="card"><div style="font-size:10px;font-weight:700;color:#999">EDIT QUESTIONS</div><input id="q1" class="input" style="text-align:left" value="do you know how cute you are?"><input id="q2" class="input" style="text-align:left" value="will you stay with Chiku forever?"><input id="q3" class="input" style="text-align:left" value="be mine forever?"><button class="btn" style="padding:10px" onclick="saveQ()">Save Questions ✓</button></div>
+<div class="card"><div style="font-size:10px;font-weight:700;color:#999">FINAL MESSAGE - TAP WORDS TO SET</div><div id="finalMsg" style="margin-top:8px;font-size:13px;background:#fafafa;padding:10px;border-radius:10px">i knew it, you love me ❤️</div></div>
 </div>
 
-<div class="card" id="done" style="display:none;text-align:center">
-<h2 style="color:#ff3b6b">i knew it ❤️</h2><p id="final" style="margin-top:12px;line-height:1.6;font-size:.95rem;color:#555"></p>
+<div id="tab-theme" style="display:none"><div class="card"><b style="font-size:12px">10 themes - SELECT ONE</b><div class="theme-grid" style="margin-top:10px"><div class="theme active" style="background:linear-gradient(135deg,#ff758c,#ff3b6b)" onclick="setTheme(this,'#ff8fa3','#fff','#ff3b6b')">Blush ✓</div><div class="theme" style="background:#111" onclick="setTheme(this,'#111','#1a1a1a','#fff')">Dark</div><div class="theme" style="background:linear-gradient(135deg,#e8e8e8,#bbb);color:#000" onclick="setTheme(this,'#e5e7eb','#fff','#000')">Y2K</div><div class="theme" style="background:linear-gradient(135deg,#c5b4ff,#8b5cf6)" onclick="setTheme(this,'#a78bfa','#fff','#7c3aed')">Lavender</div><div class="theme" style="background:#fff;color:#000;border:1px solid #eee" onclick="setTheme(this,'#ffffff','#f9f9f9','#111')">Minimal</div><div class="theme" style="background:linear-gradient(135deg,#ff9a3c,#ff5e00)" onclick="setTheme(this,'#ff7a18','#fff','#ff4d00')">Sunset</div><div class="theme" style="background:#4a2c2a" onclick="setTheme(this,'#4a2c2a','#f5f1eb','#4a2c2a')">Choco</div><div class="theme" style="background:linear-gradient(135deg,#7dd3fc,#0ea5e9)" onclick="setTheme(this,'#7dd3fc','#fff','#0284c7')">Cloud</div><div class="theme" style="background:linear-gradient(135deg,#ff00cc,#3333ff)" onclick="setTheme(this,'#1a1a1a','#111','#ff00cc')">Neon</div><div class="theme" style="background:linear-gradient(135deg,#d4a574,#8b6f47)" onclick="setTheme(this,'#c9a87c','#fff8ef','#8b6f47')">Vintage</div></div></div></div>
+
+<div id="tab-words" style="display:none"><div class="card"><div style="font-size:10px;font-weight:700;color:#999">CATEGORY</div><div style="margin:8px 0"><div class="pill active" onclick="setCat(this,'love')">Love</div><div class="pill" onclick="setCat(this,'friend')">Friend</div><div class="pill" onclick="setCat(this,'bday')">Bday</div><div class="pill" onclick="setCat(this,'anni')">Anniversary</div><div class="pill" onclick="setCat(this,'bestie')">Bestie</div></div><div id="textList"></div></div></div>
+
+<div id="tab-media" style="display:none">
+<div class="card"><b style="font-size:12px">📸 photos - tap to select/delete</b><label style="display:block;margin-top:8px;border:1.5px dashed #ddd;border-radius:12px;padding:10px;text-align:center;font-size:11px;background:#fafafa"><input type="file" accept="image/*" multiple hidden onchange="addP(this)">+ Add Photos</label><div class="gallery-grid" id="g"></div></div>
+<div class="card"><b style="font-size:12px">🎵 music - SELECT ONE SONG</b><p style="font-size:10px;color:#888">jo select karega wahi usko play hoga</p><div style="display:flex;gap:6px;margin-top:8px"><input id="s" class="input" style="margin:0;text-align:left" placeholder="search song"><button class="btn" style="width:56px;margin:0" onclick="searchS()">Go</button></div><div id="r"></div><div id="pl" style="display:none;margin-top:10px"><audio id="au" controls style="width:100%"></audio></div></div>
 </div>
 
-<div class="card"><b style="color:#ff3b6b">📸 gallery</b><label class="upload" style="margin-top:10px"><input type="file" accept="image/*" multiple hidden onchange="addP(this)">+ add photos</label><div class="gallery" id="g"></div></div>
-
-<div class="card"><b style="color:#ff3b6b">🎵 music</b><label class="upload" style="margin:10px 0"><input type="file" accept="audio/*" hidden onchange="playL(this)">+ from gallery</label><div style="display:flex;gap:8px"><input id="s" placeholder="search song" style="flex:1;padding:11px;border-radius:12px;border:1.5px solid #ffd1dc"><button onclick="search()" style="padding:11px 14px;border-radius:12px;border:none;background:#ff3b6b;color:#fff">go</button></div><div id="r"></div><div id="pl" style="display:none;margin-top:10px"><b id="np" style="font-size:.85rem"></b><audio id="au" controls autoplay style="width:100%;margin-top:6px"></audio></div></div>
 </div>
+<div class="bottom-nav"><button class="active" onclick="switchTab('home',this)">🏠<br>home</button><button onclick="switchTab('theme',this)">🎨<br>theme</button><button onclick="switchTab('words',this)">💬<br>words</button><button onclick="switchTab('media',this)">🎵<br>media</button></div>
+</div>
+
+<div id="settings" onclick="if(event.target.id==='settings')closeSet()"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><b>Settings ⚙️</b><button onclick="closeSet()" style="border:none;background:#f0f0f0;padding:6px 10px;border-radius:10px">✕</button></div>
+<div class="row"><span>💘 No button bhagega</span><div class="toggle on" id="t-no" onclick="tog(this)"><i></i></div></div>
+<div class="row"><span>🎉 Confetti on YES</span><div class="toggle on" id="t-conf" onclick="tog(this)"><i></i></div></div>
+<div class="row"><span>❤️ Heart Cursor</span><div class="toggle" id="t-heart" onclick="tog(this)"><i></i></div></div>
+<div class="row"><span>📸 Show Photos Section</span><div class="toggle on" id="t-photo" onclick="tog(this)"><i></i></div></div>
+<div class="row"><span>🎵 Show Music Section</span><div class="toggle on" id="t-music" onclick="tog(this)"><i></i></div></div>
+<div class="row"><span>🔒 Lock Music (only play, no search for her)</span><div class="toggle on" id="t-lock" onclick="tog(this)"><i></i></div></div>
+<div style="margin-top:12px;font-size:10px;color:#888">Creator: Chiku | For: Amayra<br>All selections are live. Just share the link.</div>
+</div></div>
 
 <script>
-const Q=["do you know how cute you are?","will you stay with Chiku forever?","can i be your fav person?","be mine forever?"];
-let i=0, name="";
-function go(){name=document.getElementById('n').value.trim();if(!name)return;document.getElementById('gate').style.display='none';document.getElementById('main').style.display='block';document.getElementById('hi').innerText=`hey ${name} ❤️`;document.getElementById('qT').innerText=Q[0]}
-function move(){const b=document.getElementById('no');b.style.left=Math.random()*40+10+'%';b.style.top=Math.random()*60-20+'px';document.getElementById('msg').style.display='block'}
-function next(){i++;if(i<Q.length){document.getElementById('qT').innerText=Q[i];document.getElementById('msg').style.display='none';document.getElementById('no').style.left='62%';document.getElementById('no').style.top='0'}else{document.getElementById('qBox').style.display='none';document.getElementById('done').style.display='block';document.getElementById('final').innerText=`this little world is for you, ${name}. add your photos, add your fav songs. you are my fav. - Chiku ❤️`}}
-function addP(inp){const g=document.getElementById('g');for(let f of inp.files){let u=URL.createObjectURL(f);let im=document.createElement('img');im.src=u;g.appendChild(im)}}
-function playL(inp){const f=inp.files[0];if(!f)return;document.getElementById('pl').style.display='block';document.getElementById('np').innerText=f.name;document.getElementById('au').src=URL.createObjectURL(f)}
-async function search(){let q=document.getElementById('s').value;if(!q)return;document.getElementById('r').innerHTML='searching...';let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);let d=await res.json();let h='';d.results.forEach(s=>{h+=`<div style="display:flex;gap:8px;padding:8px;cursor:pointer" onclick="document.getElementById('pl').style.display='block';document.getElementById('np').innerText='${s.trackName}';document.getElementById('au').src='${s.previewUrl}'"><img src="${s.artworkUrl100}" style="width:38px;border-radius:6px"><div style="font-size:.8rem"><b>${s.trackName}</b><br>${s.artistName}</div></div>`});document.getElementById('r').innerHTML=h}
+let name="", qi=0, Q=["do you know how cute you are?","will you stay with Chiku forever?","be mine forever?"];
+const texts={love:["you are my favorite notification.","my world starts and ends with you.","you + me = my fav story"],friend:["you are my safe place.","thanks for being my unpaid therapist."],bday:["happy bday cutie.","today is all about you."],anni:["one year down, forever to go.","still falling for you."],bestie:["you are my 4am person.","bestie energy only."]};
+let cat='love', noRun=true;
+
+function openSet(){document.getElementById('settings').classList.add('show')}
+function closeSet(){document.getElementById('settings').classList.remove('show')}
+function tog(el){el.classList.toggle('on'); if(el.id==='t-no') noRun=el.classList.contains('on')}
+
+function startQ(){name=document.getElementById('n').value.trim();if(!name)return alert('name likho');Q=[document.getElementById('q1')?.value||Q[0],document.getElementById('q2')?.value||Q[1],document.getElementById('q3')?.value||Q[2]];document.getElementById('gate').style.display='none';document.getElementById('qScreen').style.display='flex';document.getElementById('qT').innerText=Q[0]}
+function saveQ(){Q=[document.getElementById('q1').value,document.getElementById('q2').value,document.getElementById('q3').value];alert('Questions Saved ✓')}
+function moveNo(){if(!noRun) return;let b=document.getElementById('no');b.style.left=Math.random()*30+10+'%';b.style.top=Math.random()*60+'px';document.getElementById('qMsg').style.display='block'}
+function nextQ(){qi++;if(qi<Q.length){document.getElementById('qT').innerText=Q[qi];document.getElementById('qMsg').style.display='none';document.getElementById('no').style.left='60%';document.getElementById('no').style.top='0'}else{document.getElementById('qScreen').style.display='none';document.getElementById('main').style.display='block';document.getElementById('hi').innerText=`hey ${name} ❤️`;renderTexts()}}
+
+function switchTab(t,el){document.querySelectorAll('[id^=tab-]').forEach(d=>d.style.display='none');document.getElementById('tab-'+t).style.display='block';document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));el.classList.add('active');if(t==='words') renderTexts()}
+function setCat(el,c){cat=c;document.querySelectorAll('#tab-words.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');renderTexts()}
+function setTheme(el,bg,card,acc){document.getElementById('body').style.setProperty('--bg',bg);document.getElementById('body').style.setProperty('--card',card);document.getElementById('body').style.setProperty('--accent',acc);document.querySelectorAll('.theme').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
+function renderTexts(){let h='';(texts[cat]||texts.love).forEach(t=>{h+=`<div class="pill" style="display:block;padding:10px;margin:6px 0;background:#fafafa;border:1px solid #eee" onclick="document.getElementById('finalMsg').innerText='${t} ❤️ - Chiku'">${t}</div>`});document.getElementById('textList').innerHTML=h}
+function addP(i){let g=document.getElementById('g');for(let f of i.files){let u=URL.createObjectURL(f);let d=document.createElement('div');d.innerHTML=`<img src="${u}"><span onclick="this.parentElement.remove()">×</span>`;g.appendChild(d)}}
+async function searchS(){let q=document.getElementById('s').value;if(!q)return;document.getElementById('r').innerHTML='...';let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=6`);let d=await res.json();let h='';d.results.forEach(s=>{h+=`<div class="song" onclick="selectSong(this,'${s.previewUrl}','${s.trackName}')"><img src="${s.artworkUrl100}" style="width:38px;border-radius:8px"><div style="font-size:11px"><b>${s.trackName}</b><br>${s.artistName}</div></div>`});document.getElementById('r').innerHTML=h}
+function selectSong(el,url,title){document.querySelectorAll('.song').forEach(s=>s.classList.remove('active'));el.classList.add('active');document.getElementById('pl').style.display='block';document.getElementById('au').src=url;document.getElementById('au').play()}
+renderTexts();
 </script>
 </body>
     </html>
