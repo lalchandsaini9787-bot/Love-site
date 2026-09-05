@@ -1,227 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>make. - by smartyyy__36</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<title>make. by smartyyy__36</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&family=Caveat:wght@600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff5f6;--card:#fff;--accent:#111;--text:#111}
+:root{--bg:#fff5f6;--card:#fff;--accent:#111;--font:'Poppins',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.3s}
+body{font-family:var(--font);background:var(--bg);min-height:100vh}
 .box{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:90;padding:16px}
-.card{background:var(--card);border-radius:24px;padding:20px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
-.input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #eee;background:#fafafa;outline:none;margin-top:8px;font-size:13px}
+.card{background:var(--card);border-radius:22px;padding:18px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
+.input,.select{width:100%;padding:11px 13px;border-radius:12px;border:1.5px solid #eee;background:#fafafa;outline:none;margin-top:8px;font-size:13px}
 .btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;margin-top:12px;cursor:pointer}
-.small{font-size:10px;color:#888}
-.pill{display:inline-block;padding:6px 12px;background:#f2f2f2;border-radius:20px;font-size:11px;margin:3px;cursor:pointer;border:1.5px solid transparent}
+.small{font-size:10px;color:#999}
+.pill{padding:7px 12px;background:#f2f2f2;border-radius:20px;font-size:11px;margin:3px;display:inline-block;cursor:pointer}
 .pill.active{background:var(--accent);color:#fff}
-.row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f2f2f2;font-size:12px}
-.row input[type=color]{width:32px;height:32px;border:none;border-radius:8px;cursor:pointer}
-#builder{max-width:420px;margin:auto;padding:12px;padding-bottom:100px;display:none}
-.top{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);padding:10px 14px;border-radius:16px;position:sticky;top:8px;z-index:20;border:1px solid rgba(0,0,0,.06)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2;font-size:12px}
+#builder{max-width:420px;margin:auto;padding:12px;padding-bottom:110px;display:none}
+.top{position:sticky;top:8px;z-index:20;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(20px);padding:10px 14px;border-radius:16px;border:1px solid rgba(0,0,0,.06)}
 .gif{width:170px;height:170px;object-fit:contain;margin:auto;display:block}
-.qbtns{position:relative;height:80px;display:flex;justify-content:center;align-items:center;gap:10px;margin-top:10px}
-.qbtns button{padding:11px 22px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
-#yesB,#yes{background:var(--accent);color:#fff}
-#noB,#no{background:#fff;border:1.5px solid #eee;position:absolute;left:58%}
-.footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);padding:6px 14px;border-radius:30px;border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 12px rgba(0,0,0,.05)}
-.footer a{color:#999;text-decoration:none;display:flex;align-items:center;gap:5px}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.qbtns{position:relative;height:80px;display:flex;justify-content:center;align-items:center;gap:10px}
+.qbtns button{padding:11px 22px;border-radius:12px;border:none;font-weight:700}
+#yesB{background:var(--accent);color:#fff}
+#noB{background:#fff;border:1.5px solid #eee;position:absolute;left:58%}
+.gal-grid.scatter{display:block;position:relative;height:280px;margin-top:10px}
+.gal-grid.scatter img{position:absolute;width:100px;height:120px;object-fit:cover;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.12);border:3px solid #fff}
+.gal-grid.scatter img:nth-child(1){left:5%;top:5%;transform:rotate(-8deg)}
+.gal-grid.scatter img:nth-child(2){left:48%;top:0%;transform:rotate(6deg)}
+.gal-grid.scatter img:nth-child(3){left:8%;top:50%;transform:rotate(4deg)}
+.gal-grid.scatter img:nth-child(4){left:50%;top:45%;transform:rotate(-6deg)}
+@keyframes fall{to{transform:translateY(110vh)}}@keyframes swing{0%{transform:translateY(-250px)}60%{transform:translateY(20px)}100%{transform:translateY(0)}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN - CHIKU -->
-<div class="box" id="loginBox">
-<div class="card" style="text-align:left">
-<p style="letter-spacing:3px;font-size:10px;color:#aaa;font-weight:700">MAKE. LOGIN</p>
-<h2 style="margin-top:8px;font-size:22px">Welcome Chiku 👋</h2>
-<input id="l_user" class="input" placeholder="Username">
-<input id="l_email" class="input" placeholder="Gmail">
-<input id="l_pass" class="input" type="password" placeholder="Password">
-<button class="btn" onclick="doLogin()">Login & Open Builder</button>
-<p class="small" style="text-align:center;margin-top:10px">dev <a href="https://instagram.com/smartyyy__36" target="_blank" style="color:#111;font-weight:700;text-decoration:none">@smartyyy__36</a></p>
-</div>
-</div>
+<div class="box" id="loginBox"><div class="card"><p style="letter-spacing:3px;font-size:10px;color:#aaa;font-weight:700">MAKE. LOGIN</p><h2 style="margin-top:8px">Welcome Chiku 👋</h2><input id="l_user" class="input" placeholder="Username"><input id="l_email" class="input" placeholder="Gmail"><input id="l_pass" class="input" type="password" placeholder="Password"><button class="btn" onclick="doLogin()">Login</button></div></div>
 
-<!-- BUILDER -->
 <div id="builder">
-<div class="top"><b>make. builder</b><span style="font-size:10px">by <a href="https://instagram.com/smartyyy__36" style="color:#111;text-decoration:none;font-weight:700">@smartyyy__36</a></span></div>
+<div class="top"><b>make.</b><span style="font-size:10px;font-weight:700">@smartyyy__36</span></div>
 
 <div class="card" style="margin-top:12px">
-<b style="font-size:12px">1. Recipient Name</b>
-<input id="toName" class="input" placeholder="e.g. Amayra" value="Amayra">
-<p class="small">QR pe ye naam jayega -?to=Amayra</p>
+<b style="font-size:12px">1. Type Select - Questions auto change</b>
+<select id="typeSel" class="select" onchange="changeType()">
+<option value="love">❤️ Love</option>
+<option value="friends">🤝 Friends</option>
+<option value="bday">🎂 Birthday</option>
+<option value="sorry">🥺 Sorry</option>
+<option value="bestie">👯 Bestie</option>
+<option value="custom">✏️ Custom</option>
+</select>
+<p class="small" id="typeHint">Love wale questions</p>
 </div>
 
-<div class="card">
-<b style="font-size:12px">2. Questions (4 steps)</b>
-<input id="q1" class="input" value="DO you love me? 🤗">
-<input id="q2" class="input" value="Please think again! 🙄">
-<input id="q3" class="input" value="Ek aur baar Soch lo! 😣">
-<input id="q4" class="input" value="Baby Man jao na! Kitna bhav khaogi 😤">
+<div class="card"><b style="font-size:12px">2. Questions - Auto</b><input id="q1" class="input"><input id="q2" class="input"><input id="q3" class="input"><input id="q4" class="input"></div>
+
+<div class="card"><b style="font-size:12px">3. Font Customize</b><div style="margin-top:8px"><span class="pill active" onclick="setFont('Poppins',this)">Poppins</span><span class="pill" onclick="setFont('Pacifico',this)" style="font-family:'Pacifico'">Cute</span><span class="pill" onclick="setFont('Caveat',this)" style="font-family:'Caveat'">Handwriting</span><span class="pill" onclick="setFont('Bebas Neue',this)" style="font-family:'Bebas Neue'">BOLD</span></div></div>
+
+<div class="card"><b style="font-size:12px">4. Theme + Light</b><div style="margin-top:8px"><span class="pill active" onclick="setTheme('#fff5f6','#fff','#111',this)">Blush</span><span class="pill" onclick="setTheme('#fefce8','#fff','#111',this)">Cream</span><span class="pill" onclick="setTheme('#f0f9ff','#fff','#0ea5e9',this)">Sky</span><span class="pill" onclick="setTheme('#111','#1e1e1e','#fff',this)">Dark</span></div><div class="row"><span>Background</span><input type="color" id="c_bg" value="#fff5f6" oninput="customC()"></div><div class="row"><span>Card</span><input type="color" id="c_card" value="#ffffff" oninput="customC()"></div><div class="row"><span>Button</span><input type="color" id="c_acc" value="#111111" oninput="customC()"></div></div>
+
+<div class="card"><b style="font-size:12px">5. Recipient + Final</b><input id="toName" class="input" value="Amayra"><input id="fMsg" class="input" value="You are my favourite notification ❤️"><input id="logoText" class="input" value="Your Chiku ❤️"></div>
+
+<div class="card"><b style="font-size:12px">6. Gallery - Scattered (alag alag jagah)</b><input type="file" id="gal" multiple accept="image/*" class="input"><div id="galPrev" class="gal-grid scatter"></div></div>
+
+<div class="card"><b style="font-size:12px">7. Stickers + Animation 🕷️</b><div style="margin-top:8px"><span class="pill" onclick="addSticker('🕷️')">🕷️ Spiderman</span><span class="pill" onclick="addSticker('💖')">💖</span><span class="pill" onclick="addSticker('🧸')">🧸</span><span class="pill" onclick="addSticker('🎂')">🎂</span></div><div id="stickerPrev" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div><div style="margin-top:8px"><span class="pill active" onclick="setAnim('spider',this)">Spiderman Swing</span><span class="pill" onclick="setAnim('hearts',this)">Hearts Rain</span><span class="pill" onclick="setAnim('none',this)">None</span></div></div>
+
+<div class="card"><b style="font-size:12px">8. Music - Background only</b><div style="display:flex;gap:6px;margin-top:6px"><input id="songQ" class="input" style="margin:0" placeholder="Until I Found You"><button class="btn" style="width:60px;margin:0" onclick="searchSong()">Go</button></div><div id="songRes"></div></div>
+
+<button class="btn" style="padding:16px;background:#111" onclick="generate()">✨ Generate Link & QR</button>
 </div>
 
-<div class="card">
-<b style="font-size:12px">3. Final Message + Logo</b>
-<input id="fMsg" class="input" value="You are my favourite notification. ❤️">
-<input id="logoText" class="input" value="Your Chiku ❤️" style="margin-top:8px">
-</div>
+<div class="box" id="genBox" style="display:none"><div class="card" style="text-align:center"><h3>Ready! 🚀</h3><p class="small">For: <b id="genFor"></b></p><img id="qrImg" style="width:180px;height:180px;margin:12px auto;background:#fff;padding:8px;border-radius:16px;display:block"><input id="genLink" class="input" readonly><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="background:#fff;color:#111;border:1.5px solid #eee" onclick="copyL()">Copy</button><button class="btn" onclick="downloadQR()">Download QR</button></div><button class="btn" style="background:#f3f3f3;color:#111" onclick="backBuilder()">← Back</button></div></div>
 
-<div class="card">
-<b style="font-size:12px">4. Theme + Customize + Light</b>
-<div style="margin-top:8px">
-<span class="pill active" onclick="setTheme('#fff5f6','#ffffff','#111111',this)">Blush Light</span>
-<span class="pill" onclick="setTheme('#fefce8','#ffffff','#111111',this)">Cream Light</span>
-<span class="pill" onclick="setTheme('#f0f9ff','#ffffff','#0ea5e9',this)">Sky Light</span>
-<span class="pill" onclick="setTheme('#f0fdf4','#ffffff','#15803d',this)">Mint Light</span>
-<span class="pill" onclick="setTheme('#111111','#1e1e1e','#ffffff',this)">Dark Premium</span>
-</div>
-<div class="row"><span>Background</span><input type="color" id="c_bg" value="#fff5f6" oninput="customC()"></div>
-<div class="row"><span>Card</span><input type="color" id="c_card" value="#ffffff" oninput="customC()"></div>
-<div class="row"><span>Button / Accent</span><input type="color" id="c_acc" value="#111111" oninput="customC()"></div>
-<div class="row"><span>Halka / Light</span><input type="range" min="40" max="100" value="100" oninput="document.body.style.filter=`brightness(${this.value}%)`"></div>
-</div>
+<div class="box" id="recGate" style="display:none"><div class="card"><h2 id="recNameTitle"></h2><button class="btn" onclick="startRec()">Open →</button></div></div>
+<div class="box" id="recQ" style="display:none"><div class="card" style="text-align:center"><img id="recGif" class="gif"><h2 id="recQTitle" style="font-size:18px;margin-top:8px"></h2><div class="qbtns"><button id="yesB" onclick="recYes()">Yes</button><button id="noB" onmouseover="recNo()" onclick="recNo()">No</button></div></div></div>
+<div class="box" id="recFinal" style="display:none"><div class="card" style="text-align:center"><h2 id="finalHead"></h2><p id="recLogo" style="font-size:12px;color:#888;margin-top:6px"></p><div id="recFMsg" style="background:#f9f9f9;padding:10px;border-radius:12px;margin-top:10px;font-size:12px"></div><div id="recGal" class="gal-grid scatter" style="margin-top:12px;position:relative"></div><audio id="recAud" autoplay loop style="display:none"></audio></div></div>
 
-<div class="card">
-<b style="font-size:12px">5. Gallery</b>
-<input type="file" id="gal" multiple accept="image/*" class="input">
-<div id="galPrev" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div>
-</div>
-
-<div class="card">
-<b style="font-size:12px">6. Music - Only Final pe bajega</b>
-<div style="display:flex;gap:6px;margin-top:6px"><input id="songQ" class="input" style="margin:0" placeholder="search - Until I Found You"><button class="btn" style="width:60px;margin:0" onclick="searchSong()">Go</button></div>
-<div id="songRes"></div>
-<p class="small" style="margin-top:6px">Selected: <b id="selSong">None</b></p>
-</div>
-
-<button class="btn" style="padding:16px;font-size:14px;background:#111" onclick="generate()">✨ Generate Link & QR</button>
-</div>
-
-<!-- GENERATE PAGE -->
-<div class="box" id="genBox" style="display:none">
-<div class="card" style="text-align:center">
-<h3>Ready! 🚀</h3>
-<p class="small">For: <b id="genFor">Amayra</b></p>
-<img id="qrImg" style="width:180px;height:180px;margin:12px auto;background:#fff;padding:8px;border-radius:16px;display:block">
-<input id="genLink" class="input" readonly style="font-size:11px">
-<div style="display:flex;gap:8px;margin-top:10px">
-<button class="btn" style="background:#fff;color:#111;border:1.5px solid #eee" onclick="copyL()">Copy Link</button>
-<button class="btn" onclick="downloadQR()">Download QR</button>
-</div>
-<button class="btn" style="background:#f3f3f3;color:#111" onclick="backBuilder()">← Back</button>
-</div>
-</div>
-
-<!-- RECIPIENT - ONLY QUESTIONS (No login) -->
-<div class="box" id="recGate" style="display:none">
-<div class="card" style="text-align:left">
-<p style="letter-spacing:3px;font-size:10px;color:#aaa;font-weight:700">MAKE.</p>
-<h2 id="recNameTitle" style="margin-top:8px;font-size:22px">Hey Amayra!</h2>
-<p style="font-size:11px;color:#888;margin-top:4px">this is for you</p>
-<button class="btn" onclick="startRec()">Open →</button>
-</div>
-</div>
-
-<div class="box" id="recQ" style="display:none">
-<div class="card" style="text-align:center">
-<img id="recGif" class="gif" src="">
-<h2 id="recQTitle" style="font-size:18px;margin-top:8px"></h2>
-<p id="recQSub" style="font-size:11px;color:#888"></p>
-<div class="qbtns"><button id="yesB" onclick="recYes()">Yes</button><button id="noB" onmouseover="recNo()" ontouchstart="recNo()" onclick="recNo()">No</button></div>
-</div>
-</div>
-
-<div class="box" id="recFinal" style="display:none">
-<div class="card" style="padding:0;overflow:hidden;text-align:center">
-<img class="gif" style="width:100%;height:200px;background:#fff0f2" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif">
-<div style="padding:18px">
-<h2 style="font-size:20px;line-height:1.3">Hehehehe, I knew it! Love you a lot 😘</h2>
-<p id="recLogo" style="font-size:12px;color:#888;margin-top:6px">Your Chiku ❤️</p>
-<div id="recFMsg" style="background:#f9f9f9;padding:10px;border-radius:12px;margin-top:10px;font-size:12px">You are my favourite notification. ❤️</div>
-<div id="recGal" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center"></div>
-<div id="recMusic" style="margin-top:12px;background:#111;border-radius:12px;padding:10px;display:none"><audio id="recAud" controls autoplay loop style="width:100%"></audio></div>
-</div>
-</div>
-</div>
-
-<!-- SMALL GRAY FOOTER -->
-<div class="footer">
-<a href="https://instagram.com/smartyyy__36" target="_blank">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="#999"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2.3 2.5.5.6.2 1.5 1.4 1.4.4.7.8.9 1.4.2.5.4 1.3.5 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.5-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.5.2-1.3.4-2.5.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.5a3.6 3.6 0 0 1-1.4-.9 3.6 3.6 0 0 1-.9-1.4c-.2-.5-.4-1.3-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.5-2.5.2-.6.5-1.9-1.4.4-.4.8-.7 1.4-.9.5-.2 1.3-.4 2.5-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C3 9.8 3 10.2 3 12s0 2.2.1 3.4c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1.3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1.4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6zm5.2-2.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
-<span style="font-size:10px;font-weight:600">smartyyy__36</span></a>
-<span style="width:1px;height:10px;background:#e5e5e5"></span>
-<span style="font-size:9px;color:#bbb">Made with ♡</span>
+<!-- FOOTER FINAL - Gray Font + Normal Gray Logo - Tap pe Insta khulega -->
+<div onclick="window.open('https://instagram.com/smartyyy__36','_blank')" style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:999;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:6px 14px;border-radius:30px;border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 12px rgba(0,0,0,.05);cursor:pointer">
+  <span style="font-size:10px;color:#9a9a9a;font-weight:500;font-family:'Poppins',sans-serif">follow us :</span>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="#9a9a9a" style="display:block"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
 </div>
 
 <script>
-let SONG=null, GALS=[];
-let QUESTIONS=[
-{q:"DO you love me? 🤗",s:"Your Chiku is all yours",gif:"https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif"},
-{q:"Please think again! 🙄",s:"itni jaldi na matt bolo 🥺",gif:"https://media.giphy.com/media/3o6Zt8q6B6t6i2l3k8/giphy.gif"},
-{q:"Ek aur baar Soch lo! 😣",s:"kyu aisa kar rahi ho 🥺",gif:"https://media.giphy.com/media/ISOckXUybVfQ4/giphy.gif"},
-{q:"Baby Man jao na! Kitna bhav khaogi 😤",s:"bhut glt baat hai yaar",gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"},
-];
-let qIdx=0;
-
-function doLogin(){
- let u=document.getElementById('l_user').value, e=document.getElementById('l_email').value, p=document.getElementById('l_pass').value;
- if(!u||!e||!p) return alert('sab bharo');
- localStorage.setItem('chiku_login','1');
- document.getElementById('loginBox').style.display='none';
- document.getElementById('builder').style.display='block';
-}
-function setTheme(bg,card,acc,el){document.documentElement.style.setProperty('--bg',bg);document.documentElement.style.setProperty('--card',card);document.documentElement.style.setProperty('--accent',acc);document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
-function customC(){let bg=document.getElementById('c_bg').value, card=document.getElementById('c_card').value, acc=document.getElementById('c_acc').value;document.documentElement.style.setProperty('--bg',bg);document.documentElement.style.setProperty('--card',card);document.documentElement.style.setProperty('--accent',acc);}
-
-document.getElementById('gal').addEventListener('change',e=>{
- GALS=[];let prev=document.getElementById('galPrev');prev.innerHTML='';
- [...e.target.files].forEach(f=>{
-  let r=new FileReader();r.onload=ev=>{GALS.push(ev.target.result);let im=document.createElement('img');im.src=ev.target.result;im.style.width='50px';im.style.height='50px';im.style.objectFit='cover';im.style.borderRadius='10px';prev.appendChild(im)};r.readAsDataURL(f)
- })
-});
-
-async function searchSong(){
- let q=document.getElementById('songQ').value;if(!q)return;
- document.getElementById('songRes').innerHTML='Searching...';
- let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=4`);
- let d=await res.json();let h='';
- d.results.forEach(s=>{h+=`<div style="display:flex;gap:8px;align-items:center;padding:8px;border:1px solid #eee;border-radius:10px;margin-top:6px;cursor:pointer" onclick="pickS('${s.previewUrl}','${s.trackName.replace(/'/g,'')}')"><img src="${s.artworkUrl100}" style="width:40px;border-radius:8px"><div style="font-size:11px;text-align:left"><b>${s.trackName}</b><br><span style="color:#888">${s.artistName}</span></div></div>`});
- document.getElementById('songRes').innerHTML=h
-}
-function pickS(url,name){SONG=url;document.getElementById('selSong').innerText=name}
-
-function generate(){
- let to=document.getElementById('toName').value||'Amayra';
- let data={q1:document.getElementById('q1').value,q2:document.getElementById('q2').value,q3:document.getElementById('q3').value,q4:document.getElementById('q4').value,f:document.getElementById('fMsg').value,logo:document.getElementById('logoText').value,song:SONG,gals:GALS};
- localStorage.setItem('site_'+to, JSON.stringify(data));
- let link=location.origin+location.pathname+'?to='+encodeURIComponent(to);
- document.getElementById('builder').style.display='none';
- document.getElementById('genBox').style.display='flex';
- document.getElementById('genFor').innerText=to;
- document.getElementById('genLink').value=link;
- document.getElementById('qrImg').src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;
-}
-function copyL(){let i=document.getElementById('genLink');i.select();document.execCommand('copy');alert('Copied!')}
-function downloadQR(){let a=document.createElement('a');a.href=document.getElementById('qrImg').src;a.download='QR-'+document.getElementById('genFor').innerText+'.png';a.click()}
-function backBuilder(){document.getElementById('genBox').style.display='none';document.getElementById('builder').style.display='block'}
-
-(function check(){
- let params=new URLSearchParams(location.search);let to=params.get('to');
- if(to){
-  document.getElementById('loginBox').style.display='none';
-  document.getElementById('builder').style.display='none';
-  document.getElementById('recGate').style.display='flex';
-  document.getElementById('recNameTitle').innerText='Hey '+to+'!';
-  let saved=localStorage.getItem('site_'+to);if(saved){saved=JSON.parse(saved);QUESTIONS[0].q=saved.q1;QUESTIONS[1].q=saved.q2;QUESTIONS[2].q=saved.q3;QUESTIONS[3].q=saved.q4;window._saved=saved}
- }else{ if(localStorage.getItem('chiku_login')){document.getElementById('loginBox').style.display='none';document.getElementById('builder').style.display='block'} }
-})();
-
-function startRec(){document.getElementById('recGate').style.display='none';document.getElementById('recQ').style.display='flex';showRecQ()}
-function showRecQ(){document.getElementById('recGif').src=QUESTIONS[qIdx].gif;document.getElementById('recQTitle').innerText=QUESTIONS[qIdx].q;document.getElementById('recQSub').innerText=QUESTIONS[qIdx].s}
-function recNo(){let b=document.getElementById('noB');b.style.left=Math.random()*50+30+'%';b.style.top=Math.random()*60+'%';if(qIdx<3){qIdx++;showRecQ();document.getElementById('yesB').style.transform=`scale(${1+qIdx*0.2})`}}
-function recYes(){if(qIdx<3){qIdx++;showRecQ();return}document.getElementById('recQ').style.display='none';document.getElementById('recFinal').style.display='flex';if(window._saved){document.getElementById('recFMsg').innerText=window._saved.f;document.getElementById('recLogo').innerText=window._saved.logo;if(window._saved.gals){let c=document.getElementById('recGal');window._saved.gals.forEach(src=>{let im=document.createElement('img');im.src=src;im.style.width='60px';im.style.height='60px';im.style.objectFit='cover';im.style.borderRadius='10px';c.appendChild(im)})}if(window._saved.song){document.getElementById('recMusic').style.display='block';document.getElementById('recAud').src=window._saved.song}}}
+let TEMPLATES={
+love:{qs:["DO you love me? 🤗","Please think again! 🙄","Ek aur baar Soch lo! 😣","Baby Man jao na! 😤"],final:"Hehehehe, I knew it! Love you a lot 😘"},
+friends:{qs:["Will you be my best friend forever? 🤝","Sachi me? Pakka wala? 🥺","Last time puch raha hu 🥹","Arre yaar maan ja na! 😤"],final:"Yay! Best friends forever! 🤝💖"},
+bday:{qs:["Aaj mera bday hai, wish karega? 🎂","Cake khayega mere saath? 🍰","Gift dega na? 🎁","Pakka aayega na party me? 🥳"],final:"Thank you so much! Means a lot! 🎂✨"},
+sorry:{qs:["Naraz hai kya? 🥺","Maaf karega? 🙏","Ek last chance dega? 😣","Please maan ja na yaar 😭"],final:"Thank you! Sorry again, love you! 🥺❤️"},
+bestie:{qs:["Bestie hai na tu meri? 👯","Hamesha rahega saath? 💖","Secret share karega? 🤫","Pakka wala bestie? 🫶"],final:"My bestie forever! Love you! 👯💖"},
+custom:{qs:["Question 1?","Question 2?","Question 3?","Question 4?"],final:"Hehehehe, I knew it! 😘"}
+};
+let SONG=null,GALS=[],STICKERS=[],ANIM='spider',FONT='Poppins',QS=[],qi=0;
+function changeType(){let t=typeSel.value;let d=TEMPLATES[t];q1.value=d.qs[0];q2.value=d.qs[1];q3.value=d.qs[2];q4.value=d.qs[3];typeHint.innerText=t+' wale questions';}
+function setFont(f,el){FONT=f;document.body.style.fontFamily=`'${f}',sans-serif`;el.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+function doLogin(){if(!l_user.value||!l_email.value||!l_pass.value)return alert('bhar de');localStorage.setItem('chiku_login','1');loginBox.style.display='none';builder.style.display='block';changeType();}
+function setTheme(bg,card,acc,el){document.body.style.background=bg;document.querySelectorAll('.box').forEach(b=>b.style.background=bg);document.querySelectorAll('.card').forEach(c=>c.style.background=card);document.documentElement.style.setProperty('--accent',acc);c_bg.value=bg;c_card.value=card;c_acc.value=acc;if(el){el.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}}
+function customC(){let bg=c_bg.value,card=c_card.value,acc=c_acc.value;document.body.style.background=bg;document.querySelectorAll('.box').forEach(b=>b.style.background=bg);document.querySelectorAll('.card').forEach(c=>c.style.background=card);document.documentElement.style.setProperty('--accent',acc);}
+gal.addEventListener('change',e=>{GALS=[];galPrev.innerHTML='';[...e.target.files].forEach(f=>{let r=new FileReader();r.onload=ev=>{GALS.push(ev.target.result);let im=document.createElement('img');im.src=ev.target.result;galPrev.appendChild(im)};r.readAsDataURL(f)})});
+function addSticker(em){STICKERS.push(em);let s=document.createElement('span');s.innerText=em;s.style.fontSize='22px';s.style.background='#f5f5f5';s.style.padding='4px 8px';s.style.borderRadius='10px';stickerPrev.appendChild(s)}
+function setAnim(a,el){ANIM=a;el.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+async function searchSong(){let q=songQ.value;if(!q)return;songRes.innerHTML='Searching...';let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=3`);let d=await res.json();let h='';d.results.forEach(s=>{h+=`<div style="display:flex;gap:8px;padding:8px;border:1px solid #eee;border-radius:10px;margin-top:6px;cursor:pointer" onclick="SONG='${s.previewUrl}'"><img src="${s.artworkUrl100}" style="width:40px;border-radius:8px"><div style="font-size:11px"><b>${s.trackName}</b></div></div>`});songRes.innerHTML=h}
+function generate(){let to=toName.value||'Amayra';let data={type:typeSel.value,qs:[q1.value,q2.value,q3.value,q4.value],final:TEMPLATES[typeSel.value].final,f:fMsg.value,logo:logoText.value,gals:GALS,stick:STICKERS,anim:ANIM,song:SONG,font:FONT,theme:{bg:c_bg.value,card:c_card.value,acc:c_acc.value}};localStorage.setItem('site_'+to,JSON.stringify(data));let link=location.origin+location.pathname+'?to='+encodeURIComponent(to);builder.style.display='none';genBox.style.display='flex';genFor.innerText=to;genLink.value=link;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;}
+function copyL(){genLink.select();document.execCommand('copy');alert('Copied!')}function downloadQR(){let a=document.createElement('a');a.href=qrImg.src;a.download='QR.png';a.click()}function backBuilder(){genBox.style.display='none';builder.style.display='block'}
+(function check(){let to=new URLSearchParams(location.search).get('to');if(to){loginBox.style.display='none';builder.style.display='none';recGate.style.display='flex';recNameTitle.innerText='Hey '+to+'!';let sv=localStorage.getItem('site_'+to);if(sv){sv=JSON.parse(sv);QS=sv.qs.map((q,i)=>({q,gif:["https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif","https://media.giphy.com/media/3o6Zt8q6B6t6i2l3k8/giphy.gif","https://media.giphy.com/media/ISOckXUybVfQ4/giphy.gif","https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"][i]}));window._sv=sv;document.body.style.fontFamily=`'${sv.font}',sans-serif`;document.body.style.background=sv.theme.bg;document.querySelectorAll('.box').forEach(b=>b.style.background=sv.theme.bg);}else{QS=TEMPLATES.love.qs.map((q,i)=>({q,gif:["https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif","https://media.giphy.com/media/3o6Zt8q6B6t6i2l3k8/giphy.gif","https://media.giphy.com/media/ISOckXUybVfQ4/giphy.gif","https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"][i]}))}}else{if(localStorage.getItem('chiku_login')){loginBox.style.display='none';builder.style.display='block';changeType()}}})();
+function startRec(){let sv=window._sv;if(sv&&sv.anim==='spider'){let sp=document.createElement('div');sp.style.position='fixed';sp.style.top='0';sp.style.left='50%';sp.style.transform='translateX(-50%)';sp.style.fontSize='60px';sp.style.zIndex='999';sp.style.animation='swing 2s ease';sp.innerHTML='🕷️<div style="width:2px;height:100px;background:#111;margin:auto"></div>';document.body.appendChild(sp);setTimeout(()=>sp.remove(),2000)}if(sv&&sv.anim==='hearts'){for(let i=0;i<20;i++){let h=document.createElement('div');h.innerText='💖';h.style.position='fixed';h.style.left=Math.random()*100+'vw';h.style.top='-10px';h.style.animation='fall 2s linear';document.body.appendChild(h);setTimeout(()=>h.remove(),2000)}}recGate.style.display='none';recQ.style.display='flex';showQ();}
+function showQ(){recGif.src=QS[qi].gif;recQTitle.innerText=QS[qi].q}
+function recNo(){noB.style.left=Math.random()*50+30+'%';noB.style.top=Math.random()*60+'%';if(qi<3){qi++;showQ();yesB.style.transform=`scale(${1+qi*0.2})`}}
+function recYes(){if(qi<3){qi++;showQ();return}recQ.style.display='none';recFinal.style.display='flex';let sv=window._sv;if(sv){finalHead.innerText=sv.final;recFMsg.innerText=sv.f;recLogo.innerText=sv.logo;if(sv.gals){recGal.innerHTML='';sv.gals.forEach(src=>{let im=document.createElement('img');im.src=src;recGal.appendChild(im)});sv.stick.forEach(s=>{let d=document.createElement('div');d.innerText=s;d.style.position='absolute';d.style.fontSize='26px';d.style.left=Math.random()*70+'%';d.style.top=Math.random()*70+'%';recGal.appendChild(d)})}if(sv.song){recAud.src=sv.song;recAud.play().catch(()=>{})}}else{finalHead.innerText="Hehehehe, I knew it! 😘"}}
 </script>
 </body>
- </html>
+                                </html>
