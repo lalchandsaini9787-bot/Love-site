@@ -1,168 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You</title>
+<title>make. - by smartyyy__36</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff6f7;--card:#ffffff;--accent:#111;--text:#111}
+:root{--bg:#fff5f6;--card:#fff;--accent:#111;--text:#111}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.4s}
-.q-box{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
-.q-card{background:var(--card);border-radius:28px;padding:26px;width:100%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.04)}
-.input{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid #eee;background:#fafafa;outline:none;font-size:13px;margin-top:12px;transition:.2s}
-.input:focus{border-color:var(--accent);background:#fff}
-.btn{width:100%;padding:13px;border:none;border-radius:14px;background:var(--accent);color:#fff;font-weight:700;margin-top:14px;cursor:pointer;font-size:13px;letter-spacing:.2px}
-.gif{width:170px;height:170px;object-fit:contain;margin:0 auto 10px;display:block}
-.btns{position:relative;height:70px;display:flex;justify-content:center;align-items:center;gap:12px;margin-top:14px}
-.btns button{padding:11px 24px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
-#yes{background:var(--accent);color:#fff}
-#no{background:#fff;border:1.5px solid #eee;position:absolute;left:58%;transition:.15s}
-#adminPanel{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(12px);z-index:500;display:none;overflow:auto;padding:14px}
-#adminPanel.show{display:block}
-.sheet{max-width:420px;margin:auto;background:#fff;border-radius:22px;padding:16px}
-.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.theme{border-radius:16px;height:68px;padding:10px;display:flex;align-items:end;font-weight:700;font-size:11px;cursor:pointer;border:2.5px solid transparent;position:relative}
-.theme.active{border-color:#111}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f2f2f2;font-size:12px}
-.row input[type=color]{width:32px;height:32px;border:none;border-radius:8px}
-.song{padding:8px;border-radius:10px;display:flex;gap:8px;align-items:center;border:1.5px solid transparent;cursor:pointer;margin-top:6px}
-.song.active{border-color:#111;background:#f6f6f6}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.3s}
+.box{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:90;padding:16px}
+.card{background:var(--card);border-radius:24px;padding:20px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
+.input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #eee;background:#fafafa;outline:none;margin-top:8px;font-size:13px}
+.btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;margin-top:12px;cursor:pointer}
+.small{font-size:10px;color:#888}
+.pill{display:inline-block;padding:6px 12px;background:#f2f2f2;border-radius:20px;font-size:11px;margin:3px;cursor:pointer;border:1.5px solid transparent}
+.pill.active{background:var(--accent);color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f2f2f2;font-size:12px}
+.row input[type=color]{width:32px;height:32px;border:none;border-radius:8px;cursor:pointer}
+#builder{max-width:420px;margin:auto;padding:12px;padding-bottom:100px;display:none}
+.top{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);padding:10px 14px;border-radius:16px;position:sticky;top:8px;z-index:20;border:1px solid rgba(0,0,0,.06)}
+.gif{width:170px;height:170px;object-fit:contain;margin:auto;display:block}
+.qbtns{position:relative;height:80px;display:flex;justify-content:center;align-items:center;gap:10px;margin-top:10px}
+.qbtns button{padding:11px 22px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+#yesB,#yes{background:var(--accent);color:#fff}
+#noB,#no{background:#fff;border:1.5px solid #eee;position:absolute;left:58%}
+.footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);padding:6px 14px;border-radius:30px;border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.footer a{color:#999;text-decoration:none;display:flex;align-items:center;gap:5px}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
 </style>
 </head>
-<body id="body">
+<body>
 
-<!-- GATE - CLEAN NO HEART -->
-<div class="q-box" id="gate">
-<div class="q-card">
-<div style="text-align:left">
-<p style="font-size:10px;letter-spacing:2px;color:#aaa;font-weight:700">MAKE.</p>
-<h2 style="font-size:22px;margin-top:8px;line-height:1.2;font-weight:700">What's your name?</h2>
-<p style="font-size:11px;color:#888;margin-top:6px">this is for you</p>
-</div>
-<input id="nameInp" class="input" placeholder="Enter name">
-<button class="btn" onclick="startQ()">Continue</button>
-<p id="editHint" style="font-size:9px;color:#bbb;margin-top:10px;display:none">admin mode • edit=chiku</p>
-</div>
-</div>
-
-<!-- QUESTIONS -->
-<div class="q-box" id="qScreen" style="display:none">
-<div class="q-card">
-<img id="qGif" class="gif" src="">
-<h2 id="qT" style="font-size:18px;line-height:1.3"></h2>
-<p id="qSub" style="font-size:11px;color:#888;margin-top:4px"></p>
-<div class="btns"><button id="yes" onclick="handleYes()">Yes</button><button id="no" onmouseover="handleNo()" ontouchstart="handleNo()" onclick="handleNo()">No</button></div>
+<!-- LOGIN - CHIKU -->
+<div class="box" id="loginBox">
+<div class="card" style="text-align:left">
+<p style="letter-spacing:3px;font-size:10px;color:#aaa;font-weight:700">MAKE. LOGIN</p>
+<h2 style="margin-top:8px;font-size:22px">Welcome Chiku 👋</h2>
+<input id="l_user" class="input" placeholder="Username">
+<input id="l_email" class="input" placeholder="Gmail">
+<input id="l_pass" class="input" type="password" placeholder="Password">
+<button class="btn" onclick="doLogin()">Login & Open Builder</button>
+<p class="small" style="text-align:center;margin-top:10px">dev <a href="https://instagram.com/smartyyy__36" target="_blank" style="color:#111;font-weight:700;text-decoration:none">@smartyyy__36</a></p>
 </div>
 </div>
 
-<!-- FINAL MSG - MUSIC YAHI BAJEGA -->
-<div class="q-box" id="finalScreen" style="display:none">
-<div class="q-card" style="padding:0;overflow:hidden">
-<img id="finalGif" class="gif" style="width:100%;height:200px;border-radius:0;background:#fff8f9" src="https://media.tenor.com/Wr0q4H6g1hgAAAAi/bubu-dudu-love-you.gif">
-<div style="padding:20px">
-<h2 style="font-size:20px">Hehehehe, I knew it! Love you a lot 😘</h2>
-<p style="font-size:12px;color:#888;margin-top:6px">Your Chiku ❤️</p>
-<p id="customMsg" style="font-size:12px;margin-top:12px;background:#fafafa;padding:10px;border-radius:12px"></p>
+<!-- BUILDER -->
+<div id="builder">
+<div class="top"><b>make. builder</b><span style="font-size:10px">by <a href="https://instagram.com/smartyyy__36" style="color:#111;text-decoration:none;font-weight:700">@smartyyy__36</a></span></div>
 
-<div id="musicBox" style="margin-top:14px;display:none;background:#111;border-radius:14px;padding:10px">
-<div style="display:flex;align-items:center;gap:10px"><img id="mArt" src="" style="width:42px;border-radius:10px"><div style="text-align:left;color:#fff"><div id="mTitle" style="font-size:11px;font-weight:700"></div><div id="mArtist" style="font-size:10px;color:#aaa"></div></div></div>
-<audio id="finalAudio" controls autoplay style="width:100%;margin-top:8px"></audio>
-</div>
-</div>
-</div>
+<div class="card" style="margin-top:12px">
+<b style="font-size:12px">1. Recipient Name</b>
+<input id="toName" class="input" placeholder="e.g. Amayra" value="Amayra">
+<p class="small">QR pe ye naam jayega -?to=Amayra</p>
 </div>
 
-<!-- ADMIN ONLY PANEL - QR + CUSTOMIZE -->
-<div id="adminPanel">
-<div class="sheet">
-<div style="display:flex;justify-content:space-between;align-items:center"><b>Admin • Your Chiku</b><button onclick="closeAdmin()" style="border:none;background:#f0f0f0;padding:6px 10px;border-radius:10px">✕</button></div>
-
-<div style="margin-top:12px;background:#111;color:#fff;border-radius:14px;padding:12px;display:flex;gap:10px;align-items:center">
-<div style="flex:1"><div style="font-size:11px;font-weight:700">Share QR - sirf tujhe dikhega</div><div style="font-size:9px;color:#aaa">scan karne pe seedha questions khulenge</div><input id="linkInput" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:none;font-size:10px" readonly><button class="btn" style="margin-top:6px;padding:8px;background:#fff;color:#000" onclick="copyLink()">Copy Link</button></div>
-<img id="qrImg" style="width:80px;height:80px;background:#fff;border-radius:10px;padding:4px">
+<div class="card">
+<b style="font-size:12px">2. Questions (4 steps)</b>
+<input id="q1" class="input" value="DO you love me? 🤗">
+<input id="q2" class="input" value="Please think again! 🙄">
+<input id="q3" class="input" value="Ek aur baar Soch lo! 😣">
+<input id="q4" class="input" value="Baby Man jao na! Kitna bhav khaogi 😤">
 </div>
 
-<div style="margin-top:12px">
-<b style="font-size:11px">💎 Themes + Full Customize</b>
-<div class="theme-grid">
-<div class="theme active" style="background:#fff6f7;color:#000" onclick="setTheme(this,'#fff6f7','#ffffff','#111','#111')">Light Premium</div>
-<div class="theme" style="background:#111;color:#fff" onclick="setTheme(this,'#111','#1c1c1c','#fff','#fff')">Dark Premium</div>
-<div class="theme" style="background:#fef9c3;color:#000" onclick="setTheme(this,'#fefce8','#fff','#111','#111')">Cream Light</div>
-<div class="theme" style="background:#e0f2fe;color:#000" onclick="setTheme(this,'#f0f9ff','#fff','#0ea5e9','#111')">Sky Light</div>
-</div>
-<div class="row"><span>Background</span><input type="color" id="c-bg" value="#fff6f7" oninput="customColor()"></div>
-<div class="row"><span>Card</span><input type="color" id="c-card" value="#ffffff" oninput="customColor()"></div>
-<div class="row"><span>Button</span><input type="color" id="c-acc" value="#111111" oninput="customColor()"></div>
-<div style="margin-top:8px"><div style="font-size:10px">Halka / Light - <span id="lv">100%</span></div><input type="range" min="40" max="100" value="100" style="width:100%" oninput="document.getElementById('body').style.filter=`brightness(${this.value/100})`;document.getElementById('lv').innerText=this.value+'%'"></div>
+<div class="card">
+<b style="font-size:12px">3. Final Message + Logo</b>
+<input id="fMsg" class="input" value="You are my favourite notification. ❤️">
+<input id="logoText" class="input" value="Your Chiku ❤️" style="margin-top:8px">
 </div>
 
-<div style="margin-top:12px">
-<b style="font-size:11px">🎵 Final Msg pe kaunsa gana bajega - SELECT</b>
-<div style="display:flex;gap:6px;margin-top:8px"><input id="s" class="input" style="margin:0" placeholder="search song"><button class="btn" style="width:60px;margin:0" onclick="searchS()">Go</button></div>
-<div id="sRes"></div>
+<div class="card">
+<b style="font-size:12px">4. Theme + Customize + Light</b>
+<div style="margin-top:8px">
+<span class="pill active" onclick="setTheme('#fff5f6','#ffffff','#111111',this)">Blush Light</span>
+<span class="pill" onclick="setTheme('#fefce8','#ffffff','#111111',this)">Cream Light</span>
+<span class="pill" onclick="setTheme('#f0f9ff','#ffffff','#0ea5e9',this)">Sky Light</span>
+<span class="pill" onclick="setTheme('#f0fdf4','#ffffff','#15803d',this)">Mint Light</span>
+<span class="pill" onclick="setTheme('#111111','#1e1e1e','#ffffff',this)">Dark Premium</span>
+</div>
+<div class="row"><span>Background</span><input type="color" id="c_bg" value="#fff5f6" oninput="customC()"></div>
+<div class="row"><span>Card</span><input type="color" id="c_card" value="#ffffff" oninput="customC()"></div>
+<div class="row"><span>Button / Accent</span><input type="color" id="c_acc" value="#111111" oninput="customC()"></div>
+<div class="row"><span>Halka / Light</span><input type="range" min="40" max="100" value="100" oninput="document.body.style.filter=`brightness(${this.value}%)`"></div>
 </div>
 
-<div style="margin-top:12px"><b style="font-size:11px">Final Message Text</b><input id="msgInp" class="input" value="You are my favourite notification. ❤️" oninput="document.getElementById('customMsg').innerText=this.value"></div>
+<div class="card">
+<b style="font-size:12px">5. Gallery</b>
+<input type="file" id="gal" multiple accept="image/*" class="input">
+<div id="galPrev" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div>
 </div>
+
+<div class="card">
+<b style="font-size:12px">6. Music - Only Final pe bajega</b>
+<div style="display:flex;gap:6px;margin-top:6px"><input id="songQ" class="input" style="margin:0" placeholder="search - Until I Found You"><button class="btn" style="width:60px;margin:0" onclick="searchSong()">Go</button></div>
+<div id="songRes"></div>
+<p class="small" style="margin-top:6px">Selected: <b id="selSong">None</b></p>
+</div>
+
+<button class="btn" style="padding:16px;font-size:14px;background:#111" onclick="generate()">✨ Generate Link & QR</button>
+</div>
+
+<!-- GENERATE PAGE -->
+<div class="box" id="genBox" style="display:none">
+<div class="card" style="text-align:center">
+<h3>Ready! 🚀</h3>
+<p class="small">For: <b id="genFor">Amayra</b></p>
+<img id="qrImg" style="width:180px;height:180px;margin:12px auto;background:#fff;padding:8px;border-radius:16px;display:block">
+<input id="genLink" class="input" readonly style="font-size:11px">
+<div style="display:flex;gap:8px;margin-top:10px">
+<button class="btn" style="background:#fff;color:#111;border:1.5px solid #eee" onclick="copyL()">Copy Link</button>
+<button class="btn" onclick="downloadQR()">Download QR</button>
+</div>
+<button class="btn" style="background:#f3f3f3;color:#111" onclick="backBuilder()">← Back</button>
+</div>
+</div>
+
+<!-- RECIPIENT - ONLY QUESTIONS (No login) -->
+<div class="box" id="recGate" style="display:none">
+<div class="card" style="text-align:left">
+<p style="letter-spacing:3px;font-size:10px;color:#aaa;font-weight:700">MAKE.</p>
+<h2 id="recNameTitle" style="margin-top:8px;font-size:22px">Hey Amayra!</h2>
+<p style="font-size:11px;color:#888;margin-top:4px">this is for you</p>
+<button class="btn" onclick="startRec()">Open →</button>
+</div>
+</div>
+
+<div class="box" id="recQ" style="display:none">
+<div class="card" style="text-align:center">
+<img id="recGif" class="gif" src="">
+<h2 id="recQTitle" style="font-size:18px;margin-top:8px"></h2>
+<p id="recQSub" style="font-size:11px;color:#888"></p>
+<div class="qbtns"><button id="yesB" onclick="recYes()">Yes</button><button id="noB" onmouseover="recNo()" ontouchstart="recNo()" onclick="recNo()">No</button></div>
+</div>
+</div>
+
+<div class="box" id="recFinal" style="display:none">
+<div class="card" style="padding:0;overflow:hidden;text-align:center">
+<img class="gif" style="width:100%;height:200px;background:#fff0f2" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif">
+<div style="padding:18px">
+<h2 style="font-size:20px;line-height:1.3">Hehehehe, I knew it! Love you a lot 😘</h2>
+<p id="recLogo" style="font-size:12px;color:#888;margin-top:6px">Your Chiku ❤️</p>
+<div id="recFMsg" style="background:#f9f9f9;padding:10px;border-radius:12px;margin-top:10px;font-size:12px">You are my favourite notification. ❤️</div>
+<div id="recGal" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center"></div>
+<div id="recMusic" style="margin-top:12px;background:#111;border-radius:12px;padding:10px;display:none"><audio id="recAud" controls autoplay loop style="width:100%"></audio></div>
+</div>
+</div>
+</div>
+
+<!-- SMALL GRAY FOOTER -->
+<div class="footer">
+<a href="https://instagram.com/smartyyy__36" target="_blank">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="#999"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2.3 2.5.5.6.2 1.5 1.4 1.4.4.7.8.9 1.4.2.5.4 1.3.5 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.5-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.5.2-1.3.4-2.5.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.5a3.6 3.6 0 0 1-1.4-.9 3.6 3.6 0 0 1-.9-1.4c-.2-.5-.4-1.3-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.5-2.5.2-.6.5-1.9-1.4.4-.4.8-.7 1.4-.9.5-.2 1.3-.4 2.5-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C3 9.8 3 10.2 3 12s0 2.2.1 3.4c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1.3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1.4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6zm5.2-2.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
+<span style="font-size:10px;font-weight:600">smartyyy__36</span></a>
+<span style="width:1px;height:10px;background:#e5e5e5"></span>
+<span style="font-size:9px;color:#bbb">Made with ♡</span>
 </div>
 
 <script>
-const isAdmin = new URLSearchParams(location.search).get('edit')==='chiku';
-let qi=0;
-const steps=[
-{gif:"https://media.tenor.com/iv8oRL2E5zQAAAAi/mochi-cat-cute.gif", q:"DO you love me? 🤗", sub:"Your Chiku is all yours"},
-{gif:"https://media.tenor.com/ROJ2Q2J2b2AAAAAi/bubu-dudu-sorry.gif", q:"Please think again! 🙄", sub:"itni jaldi na matt bolo 🥺"},
-{gif:"https://media.tenor.com/0cc1K1K1Z2AAAAAi/bubu-dudu-crying.gif", q:"Ek aur baar Soch lo! 😣", sub:"kyu aisa kar rahi ho 🥺"},
-{gif:"https://media.tenor.com/bFz3v3z3x4AAAAi/bubu-dudu-angry.gif", q:"Baby Man jao na! Kitna bhav khaogi 😤", sub:"bhut glt baat hai yaar"}
+let SONG=null, GALS=[];
+let QUESTIONS=[
+{q:"DO you love me? 🤗",s:"Your Chiku is all yours",gif:"https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif"},
+{q:"Please think again! 🙄",s:"itni jaldi na matt bolo 🥺",gif:"https://media.giphy.com/media/3o6Zt8q6B6t6i2l3k8/giphy.gif"},
+{q:"Ek aur baar Soch lo! 😣",s:"kyu aisa kar rahi ho 🥺",gif:"https://media.giphy.com/media/ISOckXUybVfQ4/giphy.gif"},
+{q:"Baby Man jao na! Kitna bhav khaogi 😤",s:"bhut glt baat hai yaar",gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"},
 ];
-let selectedMusic=null;
+let qIdx=0;
 
-function startQ(){
- let n=document.getElementById('nameInp').value.trim();
- if(!n) return alert('name likh');
- document.getElementById('gate').style.display='none';
- document.getElementById('qScreen').style.display='flex';
- showStep();
- if(isAdmin) setTimeout(()=>openAdmin(),400);
+function doLogin(){
+ let u=document.getElementById('l_user').value, e=document.getElementById('l_email').value, p=document.getElementById('l_pass').value;
+ if(!u||!e||!p) return alert('sab bharo');
+ localStorage.setItem('chiku_login','1');
+ document.getElementById('loginBox').style.display='none';
+ document.getElementById('builder').style.display='block';
 }
-function showStep(){document.getElementById('qGif').src=steps[qi].gif;document.getElementById('qT').innerText=steps[qi].q;document.getElementById('qSub').innerText=steps[qi].sub}
-function handleNo(){
- let b=document.getElementById('no');
- b.style.transform=`translate(${Math.random()*160-80}px, ${Math.random()*60-30}px)`;
- if(qi<steps.length-1){qi++;showStep();document.getElementById('yes').style.transform=`scale(${1+qi*0.13})`}
-}
-function handleYes(){
- if(qi<steps.length-1){qi++;showStep();return}
- document.getElementById('qScreen').style.display='none';
- document.getElementById('finalScreen').style.display='flex';
- document.getElementById('customMsg').innerText=document.getElementById('msgInp')?.value||"You are my favourite notification. ❤️";
- if(selectedMusic){
-  document.getElementById('musicBox').style.display='block';
-  document.getElementById('finalAudio').src=selectedMusic.url;
-  document.getElementById('mTitle').innerText=selectedMusic.title;
-  document.getElementById('mArtist').innerText=selectedMusic.artist;
-  document.getElementById('mArt').src=selectedMusic.art;
-  document.getElementById('finalAudio').play().catch(()=>{});
- }
- for(let i=0;i<35;i++){let d=document.createElement('div');d.innerText='❤️';d.style.position='fixed';d.style.left=Math.random()*100+'vw';d.style.top='-10px';d.style.animation='fall 2.2s linear';document.body.appendChild(d);setTimeout(()=>d.remove(),2300)}
-}
+function setTheme(bg,card,acc,el){document.documentElement.style.setProperty('--bg',bg);document.documentElement.style.setProperty('--card',card);document.documentElement.style.setProperty('--accent',acc);document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+function customC(){let bg=document.getElementById('c_bg').value, card=document.getElementById('c_card').value, acc=document.getElementById('c_acc').value;document.documentElement.style.setProperty('--bg',bg);document.documentElement.style.setProperty('--card',card);document.documentElement.style.setProperty('--accent',acc);}
 
-// ADMIN
-function openAdmin(){document.getElementById('adminPanel').classList.add('show');let link=location.origin+location.pathname;document.getElementById('linkInput').value=link;document.getElementById('qrImg').src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(link)}`}
-function closeAdmin(){document.getElementById('adminPanel').classList.remove('show')}
-function copyLink(){let i=document.getElementById('linkInput');i.select();document.execCommand('copy');alert('Copied ✓ - ye bhej de, seedha questions khulenge')}
-function setTheme(el,bg,card,acc,text){document.documentElement.style.setProperty('--bg',bg);document.documentElement.style.setProperty('--card',card);document.documentElement.style.setProperty('--accent',acc);document.documentElement.style.setProperty('--text',text);document.querySelectorAll('.theme').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-function customColor(){let bg=document.getElementById('c-bg').value, card=document.getElementById('c-card').value, acc=document.getElementById('c-acc').value;setTheme(document.querySelector('.theme'),bg,card,acc,acc==='#ffffff'?'#fff':'#111');document.documentElement.style.setProperty('--accent',acc)}
-async function searchS(){let q=document.getElementById('s').value;if(!q)return;document.getElementById('sRes').innerHTML='...';let r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);let d=await r.json();let h='';d.results.forEach(s=>{h+=`<div class="song" onclick="pickMusic(this,'${s.previewUrl}','${s.trackName.replace(/'/g,'')}','${s.artistName.replace(/'/g,'')}','${s.artworkUrl100}')"><img src="${s.artworkUrl100}" style="width:36px;border-radius:8px"><div style="font-size:11px"><b>${s.trackName}</b><br><span style="color:#888">${s.artistName}</span></div></div>`});document.getElementById('sRes').innerHTML=h}
-function pickMusic(el,url,title,artist,art){document.querySelectorAll('.song').forEach(x=>x.classList.remove('active'));el.classList.add('active');selectedMusic={url,title,artist,art};alert('Music set ✓ - ab final msg pe bajega')}
+document.getElementById('gal').addEventListener('change',e=>{
+ GALS=[];let prev=document.getElementById('galPrev');prev.innerHTML='';
+ [...e.target.files].forEach(f=>{
+  let r=new FileReader();r.onload=ev=>{GALS.push(ev.target.result);let im=document.createElement('img');im.src=ev.target.result;im.style.width='50px';im.style.height='50px';im.style.objectFit='cover';im.style.borderRadius='10px';prev.appendChild(im)};r.readAsDataURL(f)
+ })
+});
 
-if(isAdmin) document.getElementById('editHint').style.display='block';
-if(isAdmin){
- // long press top to open admin again
- document.addEventListener('dblclick', openAdmin);
+async function searchSong(){
+ let q=document.getElementById('songQ').value;if(!q)return;
+ document.getElementById('songRes').innerHTML='Searching...';
+ let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=4`);
+ let d=await res.json();let h='';
+ d.results.forEach(s=>{h+=`<div style="display:flex;gap:8px;align-items:center;padding:8px;border:1px solid #eee;border-radius:10px;margin-top:6px;cursor:pointer" onclick="pickS('${s.previewUrl}','${s.trackName.replace(/'/g,'')}')"><img src="${s.artworkUrl100}" style="width:40px;border-radius:8px"><div style="font-size:11px;text-align:left"><b>${s.trackName}</b><br><span style="color:#888">${s.artistName}</span></div></div>`});
+ document.getElementById('songRes').innerHTML=h
 }
+function pickS(url,name){SONG=url;document.getElementById('selSong').innerText=name}
+
+function generate(){
+ let to=document.getElementById('toName').value||'Amayra';
+ let data={q1:document.getElementById('q1').value,q2:document.getElementById('q2').value,q3:document.getElementById('q3').value,q4:document.getElementById('q4').value,f:document.getElementById('fMsg').value,logo:document.getElementById('logoText').value,song:SONG,gals:GALS};
+ localStorage.setItem('site_'+to, JSON.stringify(data));
+ let link=location.origin+location.pathname+'?to='+encodeURIComponent(to);
+ document.getElementById('builder').style.display='none';
+ document.getElementById('genBox').style.display='flex';
+ document.getElementById('genFor').innerText=to;
+ document.getElementById('genLink').value=link;
+ document.getElementById('qrImg').src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;
+}
+function copyL(){let i=document.getElementById('genLink');i.select();document.execCommand('copy');alert('Copied!')}
+function downloadQR(){let a=document.createElement('a');a.href=document.getElementById('qrImg').src;a.download='QR-'+document.getElementById('genFor').innerText+'.png';a.click()}
+function backBuilder(){document.getElementById('genBox').style.display='none';document.getElementById('builder').style.display='block'}
+
+(function check(){
+ let params=new URLSearchParams(location.search);let to=params.get('to');
+ if(to){
+  document.getElementById('loginBox').style.display='none';
+  document.getElementById('builder').style.display='none';
+  document.getElementById('recGate').style.display='flex';
+  document.getElementById('recNameTitle').innerText='Hey '+to+'!';
+  let saved=localStorage.getItem('site_'+to);if(saved){saved=JSON.parse(saved);QUESTIONS[0].q=saved.q1;QUESTIONS[1].q=saved.q2;QUESTIONS[2].q=saved.q3;QUESTIONS[3].q=saved.q4;window._saved=saved}
+ }else{ if(localStorage.getItem('chiku_login')){document.getElementById('loginBox').style.display='none';document.getElementById('builder').style.display='block'} }
+})();
+
+function startRec(){document.getElementById('recGate').style.display='none';document.getElementById('recQ').style.display='flex';showRecQ()}
+function showRecQ(){document.getElementById('recGif').src=QUESTIONS[qIdx].gif;document.getElementById('recQTitle').innerText=QUESTIONS[qIdx].q;document.getElementById('recQSub').innerText=QUESTIONS[qIdx].s}
+function recNo(){let b=document.getElementById('noB');b.style.left=Math.random()*50+30+'%';b.style.top=Math.random()*60+'%';if(qIdx<3){qIdx++;showRecQ();document.getElementById('yesB').style.transform=`scale(${1+qIdx*0.2})`}}
+function recYes(){if(qIdx<3){qIdx++;showRecQ();return}document.getElementById('recQ').style.display='none';document.getElementById('recFinal').style.display='flex';if(window._saved){document.getElementById('recFMsg').innerText=window._saved.f;document.getElementById('recLogo').innerText=window._saved.logo;if(window._saved.gals){let c=document.getElementById('recGal');window._saved.gals.forEach(src=>{let im=document.createElement('img');im.src=src;im.style.width='60px';im.style.height='60px';im.style.objectFit='cover';im.style.borderRadius='10px';c.appendChild(im)})}if(window._saved.song){document.getElementById('recMusic').style.display='block';document.getElementById('recAud').src=window._saved.song}}}
 </script>
-<style>@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}</style>
 </body>
-    </html>
+ </html>
