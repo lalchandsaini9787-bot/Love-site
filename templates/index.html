@@ -1,30 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SurpriseQR - Premium</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<title>For You ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ff758c,#ff7eb3);min-height:100vh}
+.container{max-width:400px;margin:auto;padding:20px 20px 100px}
+#gate{position:fixed;inset:0;background:linear-gradient(135deg,#ff758c,#ff4e6a);display:flex;align-items:center;justify-content:center;z-index:10;padding:20px}
+.box{background:#fff;border-radius:28px;padding:28px;width:100%;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.box input{width:100%;padding:14px;border-radius:14px;border:2px solid #ffd1dc;margin:14px 0;outline:none;text-align:center}
+.box button{width:100%;padding:14px;border:none;border-radius:14px;background:#ff3b6b;color:#fff;font-weight:700;cursor:pointer}
+h1{font-family:'Dancing Script';font-size:2.6rem;color:#fff;text-align:center;margin:32px 0 16px}
+.card{background:#fff;border-radius:22px;padding:22px;margin:14px 0;box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.q{text-align:center;padding:10px}
+.q h2{font-size:1.25rem;color:#2d1a25;line-height:1.4;margin-bottom:20px}
+.btns{position:relative;height:58px;display:flex;justify-content:center;gap:12px}
+.btns button{padding:12px 26px;border-radius:30px;border:none;font-weight:700;cursor:pointer}
+#yes{background:#ff3b6b;color:#fff}
+#no{background:#f1f1f1;color:#999;position:absolute;left:62%;transition:.25s}
+.upload{border:2px dashed #ff8fa3;border-radius:14px;padding:16px;text-align:center;background:#fff5f7;display:block}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px}
+</style>
 </head>
-<body class="bg-[#08070B] text-white font-[Poppins] min-h-screen flex justify-center items-center p-4">
-<div class="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-pink-500/20 to-orange-400/20 blur-[100px]"></div>
+<body>
+<div id="gate"><div class="box"><h2 style="font-family:'Dancing Script';font-size:2rem;color:#ff3b6b">hey ❤️</h2><p style="font-size:.9rem;color:#666">what's your name?</p><input id="n" placeholder="Amayra"><button onclick="go()">continue →</button></div></div>
 
-<div class="relative w-full max-w-[420px] bg-white/[0.07] backdrop-blur-[30px] border border-white/10 rounded-[32px] p-7 shadow-2xl">
-    <h1 class="text-[28px] font-extrabold text-center leading-none">Create Magic ✨</h1>
-    <p class="text-center text-white/50 text-[13px] mt-2">Bday, Love, Sorry - QR me Surprise</p>
+<div class="container" id="main" style="display:none">
+<h1 id="hi">hey ❤️</h1>
 
-    <form action="/create" method="POST" class="mt-7 space-y-4">
-        <div class="grid grid-cols-2 gap-3">
-            <label><input type="radio" name="theme" value="bday" checked class="peer hidden"><div class="peer-checked:bg-white peer-checked:text-black bg-white/10 p-4 rounded-2xl text-center cursor-pointer border border-white/10 transition-all">🎂<br><span class="text-sm font-semibold">Birthday</span></div></label>
-            <label><input type="radio" name="theme" value="love" class="peer hidden"><div class="peer-checked:bg-white peer-checked:text-black bg-white/10 p-4 rounded-2xl text-center cursor-pointer border border-white/10 transition-all">❤️<br><span class="text-sm font-semibold">Love</span></div></label>
-        </div>
-
-        <input name="name" required placeholder="Uska Naam (e.g. Simran)" class="w-full p-4 rounded-2xl bg-white/[0.08] border border-white/10 outline-none focus:border-white/30 placeholder:text-white/30">
-        <textarea name="message" required placeholder="Apna secret message yaha likho... Dil se likhna, wahi dikhega." class="w-full p-4 rounded-2xl bg-white/[0.08] border border-white/10 outline-none h-[130px] placeholder:text-white/30 focus:border-white/30"></textarea>
-
-        <button class="w-full bg-white text-black font-bold p-4 rounded-2xl text-[16px] hover:scale-[0.98] transition-all">Generate QR Surprise 🚀</button>
-        <p class="text-center text-[11px] text-white/30">100% Free - Scan karte hi surprise khulega</p>
-    </form>
+<div class="card q" id="qBox">
+<h2 id="qT"></h2>
+<div class="btns"><button id="yes" onclick="next()">yes</button><button id="no" onmouseover="move()" ontouchstart="move()" onclick="move()">no</button></div>
+<p id="msg" style="color:#ff3b6b;margin-top:14px;font-size:.85rem;display:none">no is not an option 😏</p>
 </div>
+
+<div class="card" id="done" style="display:none;text-align:center">
+<h2 style="color:#ff3b6b">i knew it ❤️</h2><p id="final" style="margin-top:12px;line-height:1.6;font-size:.95rem;color:#555"></p>
+</div>
+
+<div class="card"><b style="color:#ff3b6b">📸 gallery</b><label class="upload" style="margin-top:10px"><input type="file" accept="image/*" multiple hidden onchange="addP(this)">+ add photos</label><div class="gallery" id="g"></div></div>
+
+<div class="card"><b style="color:#ff3b6b">🎵 music</b><label class="upload" style="margin:10px 0"><input type="file" accept="audio/*" hidden onchange="playL(this)">+ from gallery</label><div style="display:flex;gap:8px"><input id="s" placeholder="search song" style="flex:1;padding:11px;border-radius:12px;border:1.5px solid #ffd1dc"><button onclick="search()" style="padding:11px 14px;border-radius:12px;border:none;background:#ff3b6b;color:#fff">go</button></div><div id="r"></div><div id="pl" style="display:none;margin-top:10px"><b id="np" style="font-size:.85rem"></b><audio id="au" controls autoplay style="width:100%;margin-top:6px"></audio></div></div>
+</div>
+
+<script>
+const Q=["do you know how cute you are?","will you stay with Chiku forever?","can i be your fav person?","be mine forever?"];
+let i=0, name="";
+function go(){name=document.getElementById('n').value.trim();if(!name)return;document.getElementById('gate').style.display='none';document.getElementById('main').style.display='block';document.getElementById('hi').innerText=`hey ${name} ❤️`;document.getElementById('qT').innerText=Q[0]}
+function move(){const b=document.getElementById('no');b.style.left=Math.random()*40+10+'%';b.style.top=Math.random()*60-20+'px';document.getElementById('msg').style.display='block'}
+function next(){i++;if(i<Q.length){document.getElementById('qT').innerText=Q[i];document.getElementById('msg').style.display='none';document.getElementById('no').style.left='62%';document.getElementById('no').style.top='0'}else{document.getElementById('qBox').style.display='none';document.getElementById('done').style.display='block';document.getElementById('final').innerText=`this little world is for you, ${name}. add your photos, add your fav songs. you are my fav. - Chiku ❤️`}}
+function addP(inp){const g=document.getElementById('g');for(let f of inp.files){let u=URL.createObjectURL(f);let im=document.createElement('img');im.src=u;g.appendChild(im)}}
+function playL(inp){const f=inp.files[0];if(!f)return;document.getElementById('pl').style.display='block';document.getElementById('np').innerText=f.name;document.getElementById('au').src=URL.createObjectURL(f)}
+async function search(){let q=document.getElementById('s').value;if(!q)return;document.getElementById('r').innerHTML='searching...';let res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);let d=await res.json();let h='';d.results.forEach(s=>{h+=`<div style="display:flex;gap:8px;padding:8px;cursor:pointer" onclick="document.getElementById('pl').style.display='block';document.getElementById('np').innerText='${s.trackName}';document.getElementById('au').src='${s.previewUrl}'"><img src="${s.artworkUrl100}" style="width:38px;border-radius:6px"><div style="font-size:.8rem"><b>${s.trackName}</b><br>${s.artistName}</div></div>`});document.getElementById('r').innerHTML=h}
+</script>
 </body>
-</html>
+    </html>
